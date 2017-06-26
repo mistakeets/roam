@@ -1,0 +1,27 @@
+{
+  "name": "roam",
+  "version": "1.0.0",
+  "description": "Travel community, for users to share tips about their favorite locations around the world",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mistakeets/roam.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mistakeets/roam/issues"
+  },
+  "homepage": "https://github.com/mistakeets/roam#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.3"
+  }
+}
