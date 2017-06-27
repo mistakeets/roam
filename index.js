@@ -1,10 +1,12 @@
 var express = require('express');
+var morgan = require('morgan')
 var app = express();
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
 app.use(express.static('./public'));
+app.use(morgan('dev'))
 
 // index page
 app.get('/', function(req, res) {

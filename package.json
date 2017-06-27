@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/mistakeets/roam#readme",
   "devDependencies": {
+    "morgan": "^1.8.2",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
