@@ -1,21 +1,29 @@
 <% include shared/header %>
 <div>
-    <form>
+    <form method='post' action='/signup'>
         <div class='row'></div>
         <div class='row'></div>
         <div class='row'>
             <div class='col s12'><h2>Sign Up for Roam</h2></div>
         </div>
         <div class='row'>
+            <% if (message.length > 0) { %>
+            <div class="alert alert-danger"><%= message %></div>
+            <% } %>
         </div>
         <div class='row'>
-            <div class='col s2 offset-s3 right-align'>Email:</div>
-            <div class='col s4'><input type='email'></input>
+            <div class='col s2 offset-s3 right-align margin-top'>Name:</div>
+            <div class='col s4'><input type='text' name='name' value='Some Person'></input>
             </div>
         </div>
         <div class='row'>
-            <div class='col s2 offset-s3 right-align'>Password:</div>
-            <div class='col s4'><input type='password'></input>
+            <div class='col s2 offset-s3 right-align margin-top'>Email:</div>
+            <div class='col s4'><input type='email' name='email' value='a1@what.net'></input>
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col s2 offset-s3 right-align margin-top'>Password:</div>
+            <div class='col s4'><input type='password' name='password' value='1234'></input>
             </div>
         </div>
         <div class='row'>

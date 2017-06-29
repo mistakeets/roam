@@ -17,6 +17,9 @@ nav {
     margin-top: -50px;
 }
 
+.margin-top {
+    margin-top: 15px !important;
+}
 .panel-content {
     position: absolute;
     float: left;

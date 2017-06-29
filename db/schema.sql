@@ -27,4 +27,4 @@ post_id SERIAL REFERENCES posts (id),
 user_id SERIAL REFERENCES users (id)
 );
 
-ALTER TABLE users ADD COLUMN current_city SERIAL REFERENCES cities (id);
+ALTER TABLE users ADD COLUMN current_city INTEGER REFERENCES cities (id);
