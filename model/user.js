@@ -22,10 +22,15 @@ class User {
   }
 
   isValidUser(email, password) {
-    var hash = bcrypt.hashSync(password);
-    return db.one({
-      text: 'SELECT * FROM users WHERE email = $1 and password = $2',
-      values: [email, hash]
+    return db.any({
+      text: 'SELECT * FROM users WHERE email = $1',
+      values: [email]
+    })
+    .then((result) => {
+      var hash = bcrypt.compareSync(password, result[0].password)
+      if (hash) {
+        return result[0]
+      }
     })
   }
 
