@@ -1,5 +1,6 @@
 "use strict"
 
+require('dotenv').config()
 var express = require('express');
 
 var morgan = require('morgan')
@@ -19,7 +20,7 @@ var User = require('./model/user');
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 
 app.use(morgan('dev'));
 app.use(session({secret: 'blahblah', resave: false, saveUninitialized: true}));
@@ -27,14 +28,6 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
 app.use(express.static('./public'));
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-})
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-})
 
 passport.use('login', new LocalStrategy(
     {usernameField: 'email', passwordField: 'password', passReqToCallback: true, session: true},
@@ -55,6 +48,17 @@ passport.use('login', new LocalStrategy(
     }
 ))
 
+passport.serializeUser((user, done) => {
+  done(null, user.username);
+})
+
+passport.deserializeUser(function(username, done) {
+  User.find(username)
+    .then(user => {
+      done(null, user);
+    })
+})
+
 app.get('/login', (req, res) => {
   res.render('login', {message: req.flash('loginFailed')})
 })
@@ -74,15 +78,19 @@ app.get('/', function(req, res) {
 });
 
 app.get('/profile', function(req, res){
-  res.render('profile')
+  res.render('profile', {message: req.flash('signupOk')})
 })
 
 app.get('/signup', function(req, res){
-  res.render('signup')
+  res.render('signup', {message: req.flash('signupFail')})
 })
 
-app.get('/login', function(req, res){
-  res.render('login')
+app.post('/signup', function(req, res){
+  var user = User.createUser(req.body.email, req.body.password, req.body.name)
+    user.then(function(data){
+      req.flash('welcome', 'Welcome to Roam ' + req.body.name + ' , Please login.')
+      res.render('login', {message: req.flash('welcome')})
+    })
 })
 
 var port =  8080;
