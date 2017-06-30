@@ -71,6 +71,16 @@ passport.authenticate('login',
     }
 ))
 
+app.get('/logout', (req, res) => {
+  req.session.destroy(function(err){
+    if (err){
+      console.log(err)
+    } else {
+      res.redirect('/')
+    }
+  })
+})
+
 // index page
 app.get('/', function(req, res) {
   res.render('index');
