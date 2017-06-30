@@ -23,7 +23,7 @@ app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({ extended: true })); // get information from html forms
 
 app.use(morgan('dev'));
-app.use(session({secret: 'blahblah', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'blahblah', resave: false, saveUninitialized: false}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash());
@@ -59,7 +59,10 @@ passport.deserializeUser(function(email, done) {
 })
 
 app.get('/login', (req, res) => {
-  res.render('login', {message: req.flash('loginFailed')})
+  res.render('login', {
+    message: req.flash('loginFailed'),
+    user: req.user
+  })
 })
 
 app.post('/login',
@@ -72,26 +75,29 @@ passport.authenticate('login',
 ))
 
 app.get('/logout', (req, res) => {
-  req.session.destroy(function(err){
-    if (err){
-      console.log(err)
-    } else {
-      res.redirect('/')
-    }
+  req.session.destroy(() => {
+  console.log('what is the session?', req.session)
+    res.redirect('/')
   })
 })
 
 // index page
 app.get('/', function(req, res) {
-  res.render('index');
+  res.render('index', {user: req.user});
 });
 
 app.get('/profile', function(req, res){
-  res.render('profile', {message: req.flash('signupOk')})
+  res.render('profile', {
+    message: req.flash('signupOk'),
+    user: req.user
+  })
 })
 
 app.get('/signup', function(req, res){
-  res.render('signup', {message: req.flash('signupFail')})
+  res.render('signup', {
+    message: req.flash('signupFail'),
+    user: req.user
+  })
 })
 
 app.post('/signup', function(req, res){

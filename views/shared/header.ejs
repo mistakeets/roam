@@ -13,18 +13,14 @@
         <div class="nav-wrapper">
             <a href="/" class="brand-logo">Roam</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <% if (locals.session) { %>
-                    <li><a href="/signup">Sign Up</a></li>
-                    <li><a href="/login">Log In</a></li>
-                    <% } else { %>
+                <% if (locals.user) { %>
                     <li><a href="/profile">Profile</a></li>
                     <li><a href="/logout">Log Out</a></li>
+                    <% } else { %>
+                    <li><a href="/signup">Sign Up</a></li>
+                    <li><a href="/login">Log In</a></li>
                 <% } %>
             </ul>
-            <!--<ul id="nav-mobile" class="right hide">
-                <li><a href="/profile">Sign Up </a></li>
-                <li><a href="/logout">Log In</a></li>
-            </ul>-->
         </div>
     </nav>
 </div>
