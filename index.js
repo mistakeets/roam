@@ -6,12 +6,12 @@ var morgan = require('morgan')
 var app = express();
 var flash = require('connect-flash');
 var session = require('express-session');
-var db = require('./db/db');
+var db = require('./db/db')
+var User = require('./model/user')
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('./config/auth')
 
-// user model
-var User = require('./model/user');
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -20,10 +20,11 @@ app.use(bodyParser.urlencoded({ extended: true })); // get information from html
 
 app.use(morgan('dev'));
 app.use(session({secret: 'blahblah', resave: false, saveUninitialized: false}));
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
 app.use(flash());
 app.use(express.static('./public'));
+
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 
 app.get('/login', (req, res) => {

@@ -1,5 +1,7 @@
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
+var db = require('../db/db')
+var User = require('../model/user')
 
 passport.use('login', new LocalStrategy(
   {usernameField: 'email', passwordField: 'password', passReqToCallback: true, session: true},
@@ -29,3 +31,5 @@ passport.deserializeUser(function(email, done) {
       done(null, user);
     })
 })
+
+module.exports = passport
