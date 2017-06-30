@@ -2,17 +2,13 @@
 
 require('dotenv').config()
 var express = require('express');
-
 var morgan = require('morgan')
 var app = express();
-var passport = require('passport');
 var flash = require('connect-flash');
 var session = require('express-session');
 var db = require('./db/db');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var LocalStrategy = require('passport-local').Strategy;
 
 // user model
 var User = require('./model/user');
@@ -29,34 +25,6 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash());
 app.use(express.static('./public'));
 
-passport.use('login', new LocalStrategy(
-  {usernameField: 'email', passwordField: 'password', passReqToCallback: true, session: true},
-  function(req, username, password, done) {
-    var user = User.isValidUser(username, password);
-    user.then(
-      function(result) {
-        console.log('ok')
-        done(null, result)
-      }
-    ).catch(
-      function(err) {
-        console.log('fail')
-        done(null, false, req.flash('loginFailed', 'No user found.'))
-      }
-    )
-  }
-))
-
-passport.serializeUser((user, done) => {
-  done(null, user.email);
-})
-
-passport.deserializeUser(function(email, done) {
-  User.findByEmail(email)
-    .then(user => {
-      done(null, user);
-    })
-})
 
 app.get('/login', (req, res) => {
   res.render('login', {
