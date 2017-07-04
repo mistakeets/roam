@@ -1,26 +1,28 @@
 <html>
+
 <head>
-    <title>Roam</title>
-    <link rel="stylesheet" type="text/css" href="/bower_components/materialize/dist/css/materialize.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-    <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/bower_components/materialize/dist/js/materialize.min.js"></script>
+  <title>Roam</title>
+  <link rel="stylesheet" type="text/css" href="/bower_components/materialize/dist/css/materialize.min.css" />
+  <link rel="stylesheet" type="text/css" href="/css/styles.css" />
+  <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.js"></script>
+  <script type="text/javascript" src="/bower_components/materialize/dist/js/materialize.min.js"></script>
 </head>
+
 <body>
-<div class="">
+  <div class="">
     <nav>
-        <div class="nav-wrapper">
-            <a href="/" class="brand-logo">Roam</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <% if (locals.user) { %>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/logout">Log Out</a></li>
-                    <% } else { %>
-                    <li><a href="/signup">Sign Up</a></li>
-                    <li><a href="/login">Log In</a></li>
-                <% } %>
-            </ul>
-        </div>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Roam</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <% if (locals.user) { %>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Log Out</a></li>
+            <% } else { %>
+              <li><a href="/signup">Sign Up</a></li>
+              <li><a href="/login">Log In</a></li>
+              <% } %>
+        </ul>
+      </div>
     </nav>
-</div>
+  </div>

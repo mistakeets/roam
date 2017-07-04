@@ -1,4 +1,4 @@
-Class City {
+class City {
 
   constructor(db) {
     this.db = db;

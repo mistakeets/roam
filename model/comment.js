@@ -1,5 +1,4 @@
-
-Class Comment {
+class Comment {
 
   constructor(db) {
     this.db = db;

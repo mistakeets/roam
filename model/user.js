@@ -1,5 +1,3 @@
-"use strict"
-
 const bcrypt = require('bcrypt-nodejs');
 const moment = require('moment');
 const db = require('../db/db');
@@ -23,15 +21,15 @@ class User {
 
   isValidUser(email, password) {
     return db.any({
-      text: 'SELECT * FROM users WHERE email = $1',
-      values: [email]
-    })
-    .then((result) => {
-      var hash = bcrypt.compareSync(password, result[0].password)
-      if (hash) {
-        return result[0]
-      }
-    })
+        text: 'SELECT * FROM users WHERE email = $1',
+        values: [email]
+      })
+      .then((result) => {
+        var hash = bcrypt.compareSync(password, result[0].password)
+        if (hash) {
+          return result[0]
+        }
+      })
   }
 
   updateByEmail(old_email, new_email, password) {
